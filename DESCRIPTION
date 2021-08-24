@@ -1,0 +1,22 @@
+Package: dplaceR
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author:
+    person("Simon", "Greenhill", email = "simon@simon.net.nz", role = c("aut", "cre"))
+Maintainer: Simon J. Greenhill <simon@simon.net.nz>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: Apache License (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    ape,
+Suggests: 
+    testthat (>= 3.0.0)
+URL: https://github.com/SimonGreenhill/dplaceR
+BugReports: https://github.com/SimonGreenhill/dplaceR/issues
+Language: en-US
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
