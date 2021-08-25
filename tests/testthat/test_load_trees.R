@@ -67,3 +67,13 @@ test_that("test load_trees - kolipakam - remapping", {
     expect_equal(trees[[1]]$tip.label[1:2], expected)
 
 })
+
+
+test_that("test load_trees - duplicates in rename", {
+    expect_warning(
+        trees <- load_trees("testdata/glottolog_utoa1244_with_duplicates/", renameto="glottocode"),
+        "Removing  3 tips that will be duplicated after rename: bann1248, cent2131, chem1251"
+    )
+    expect_equal(length(trees[[1]]$tip.label), 3)
+    expect_equal(trees[[1]]$tip.label, c('B', 'C', 'A'))  # order in tree newick
+})

@@ -38,18 +38,28 @@ load_trees <- function(dirname, type='summary', mappingfile='taxa.csv', renameto
         if ('taxon' %in% colnames(mapping) == FALSE) stop(paste('column `taxon` not in', mappingfile))
 
         if (renameto %in% colnames(mapping) == FALSE) stop(paste('colname', renameto, 'not in', mappingfile))
+
         trees <- ape::.uncompressTipLabel(trees)
+
         for (i in 1:length(trees)){
-            # remove tips not in mapping
+            # remove tips not in `taxon` mapping
+            missing <- trees[[i]]$tip.label[trees[[i]]$tip.label %in% mapping[['taxon']] == FALSE]
+            if (length(missing) > 0) {
+                trees[[i]] <- ape::drop.tip(trees[[i]], missing)
+            }
+
+            # remove tips not in `renameto` mapping
             missing <- mapping[is.na(mapping[[renameto]]), 'taxon']
             if (length(missing) > 0) {
                 trees[[i]] <- ape::drop.tip(trees[[i]], missing)
             }
-            # todo: handle duplicates in renameto?
-            # handle duplicate glottocodes
-            #dupes <- mapping[duplicated(mapping$glottocode), ]
-            #mapping <- mapping[!duplicated(mapping$glottocode), ]
-            #mapping <- rbind(mapping, data.frame(taxon=dupes$taxon, glottocode=dupes$taxon))
+
+            # handle duplicate rename tips
+            dupes <- mapping[duplicated(mapping[[renameto]], incomparables=NA), ]
+            if (nrow(dupes)) {
+                warning(paste("Removing ", nrow(dupes), "tips that will be duplicated after rename:", paste(dupes[['taxon']], collapse=", ")))
+                trees[[i]] <- ape::drop.tip(trees[[i]], dupes[['taxon']])
+            }
 
             # rename tips
             matches <- match(trees[[i]]$tip.label, mapping[['taxon']])

@@ -4,10 +4,16 @@
 \alias{load_trees}
 \title{Loads trees from DPLACE}
 \usage{
-load_trees(dirname, type = "summary")
+load_trees(dirname, type = "summary", mappingfile = "taxa.csv", renameto = NA)
 }
 \arguments{
 \item{type}{the type of tree to load (\code{summary} or \code{posterior})}
+
+\item{mappingfile}{a filename to remap tip names to (default=taxa.csv).}
+
+\item{renameto}{column in mappingfile to rename tips too.
+If NA, then no remapping is done.
+If a tip has no mapping in the mappingfile::renameto column it will be removed}
 }
 \value{
 An ape::multiPhylo object
