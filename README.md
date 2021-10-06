@@ -3,8 +3,7 @@
 ## Install
 
 ```r
-library(devtools)
-install_github("SimonGreenhill/dplaceR", dependencies = TRUE)
+devtools::install_github("SimonGreenhill/dplaceR", dependencies = TRUE)
 ```
 
 ## Load Trees
