@@ -2,6 +2,8 @@
 
 ## Install
 
+You can install dplaceR directly from GitHub using devtools:
+
 ```r
 devtools::install_github("SimonGreenhill/dplaceR", dependencies = TRUE)
 ```
