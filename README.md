@@ -1,5 +1,12 @@
 # dplaceR - R functions for DPLACE
 
+## Install
+
+```r
+library(devtools)
+install_github("SimonGreenhill/dplaceR", dependencies = TRUE)
+```
+
 ## Load Trees
 
 ```r
